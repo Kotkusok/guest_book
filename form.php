@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Форма</h1>
+    <h1>Форма <a href="list.php">Список</a></h1>
     <form action="insert.php" method="POST">
       Имя пользователя:
       <input type="text" name="username" size="10" /><br /><br />

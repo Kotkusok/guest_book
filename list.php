@@ -1,15 +1,28 @@
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="jquery.tablesorter.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $("table").tablesorter({ widgets: ['zebra']});
-});
-</script>
+    <link type="text/css" rel="stylesheet" href="css\style.css" />
 
-<h1>Список</h1>
+    <script type="text/javascript" src="js\jquery-3.7.1.js"></script>
+    <script type="text/javascript" src="js\jquery.tablesorter.js"></script>
+    
+    <script type="text/javascript">
+    $(document).ready(function() { 
+    	$("table").tablesorter({widgets: ['zebra']})
+    });
+    </script>
+
+    <title>Document</title>
+</head>
+<body>
+ 
+<h1>Список  <a href="form.php">Добавить</a></h1>
 <?php
+        
     require_once 'config.php';
     error_reporting(0);
     $link = mysqli_connect($db_host, $db_user, $db_password, $db_name);
@@ -17,7 +30,7 @@ $(document).ready(function() {
         die('<p style="color:red">'.mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
     }
     //echo "<p>Вы подключились к MySQL!</p><br>";
-    $res = mysqli_query($link, "SELECT * FROM message");
+    $res = mysqli_query($link, "SELECT * FROM message ORDER BY date DESC");
     if (!$res)
     {
         echo "error res\n";
@@ -27,15 +40,16 @@ $(document).ready(function() {
     {
         echo "";
     }
-    echo '<table>
+    echo '<table class="tablesorter">
         <thead>
             <tr>
-                <td>User Name</td>
-                <td>E-mail</td>
-                <td>Homepage</td>
-                <td>Text</td>
-                <td>IP</td>
-                <td>Browser</td>
+                <th>User Name</th>
+                <th>E-mail</th>
+                <th>Homepage</th>
+                <th>Text</th>
+                <th>IP</th>
+                <th>Browser</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>';
@@ -53,3 +67,6 @@ $(document).ready(function() {
         </table>";
     mysqli_close($link);
 ?>
+
+</body>
+</html>
